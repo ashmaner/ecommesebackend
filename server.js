@@ -7,6 +7,7 @@ const connectDb = require('./config/config')
 const productRoutes = require('./routes/productsRoute')
 const usersRoutes = require('./routes/UsersRoute')
 const orderRoutes = require('./routes/orderRoute')
+const cors = require('cors')
 
 dotenv.config()
 //connecting to mongodb database
@@ -28,6 +29,12 @@ app.get('/api/config/paypal', (req, res) => {
 })
 
 app.use(errorHandler)
+app.use(cors());
+app.get('/', (req, res) => {
+  res.setHeader("Access-Control-Allow-Credentials","true);
+                res.send("API is running");
+})
+
 
 const PORT = 8080
 app.listen(process.env.PORT || PORT, () => {
